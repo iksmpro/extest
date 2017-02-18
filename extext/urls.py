@@ -19,6 +19,6 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    url(r'^.*$', views.main_page),
     url(r'^newtask/', views.create_new_task),
+    url(r'^.*$', views.main_page),
 ]

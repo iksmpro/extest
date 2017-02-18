@@ -6,46 +6,126 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
   <title>Parallax Template - Materialize</title>
 
+  <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="{% static "css/materialize.css" %}" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="{% static "css/style.css" %}" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
-<body>
+<body background="{% static "background3.jpg"%}" style="background-attachment: fixed">
 
-  <div id="index-banner" class="parallax-container">
+  <div id="index-banner">
     <div class="section no-pad-bot">
       <div class="container">
         <br><br>
         <h1 class="header center teal-text text-lighten-2">Content Collector</h1>
-        <div class="row center">
-            <form class="col s12">
-              <div class="row">
-                <div class="input-field col s12">
-                  <input id="date1" type="date" class="datepicker">
-                  <label for="date1" data-error="wrong" data-success="right">Start period</label>
-                  <input id="date2" type="date" class="datepicker">
-                  <label for="date2" data-error="wrong" data-success="right">End period</label>
-                  <input id="email" type="email" class="validate">
-                  <label for="email" data-error="wrong" data-success="right">Email</label>
+        <div class='darken-3 z-depth-2' style="background: rgba(0, 125, 0, .5);border-radius: 50px;">
+          <div class="row center" style="padding: 30px 20px 10px 20px;opacity:1.0;">
+              <form id="newtask" action="/newtask/" method="post" class="col s12">
+                    <!-- 
+                    <option value="/2017/02/02/">Все рубрики</option>
+                    <option value="/rubrics/russia/2017/02/03/">Россия</option>
+                    <option value="/rubrics/world/2017/02/03/">Мир</option>
+                    <option value="/rubrics/ussr/2017/02/03/">Бывший СССР</option>
+                    <option value="/rubrics/economics/2017/02/03/">Финансы</option>
+                    <option value="/rubrics/business/2017/02/03/">Бизнес</option>
+                    <option value="/rubrics/forces/2017/02/03/">Силовые структуры</option>
+                    <option value="/rubrics/science/2017/02/03/">Наука и техника</option>
+                    <option value="/rubrics/sport/2017/02/03/">Спорт</option>
+                    <option value="/rubrics/culture/2017/02/03/">Культура</option>
+                    <option value="/rubrics/media/2017/02/03/">Интернет и СМИ</option>
+                    <option value="/rubrics/style/2017/02/03/">Ценности</option>
+                    <option value="/rubrics/travel/2017/02/03/">Путешествия</option>
+                    <option value="/rubrics/life/2017/02/03/">Из жизни</option>
+                    <option value="/rubrics/motor/2017/02/03/">Мотор</option>
+                    <option value="/rubrics/realty/2017/02/03/">Недвижимость</option></select> -->
+                    {% csrf_token %}
+                    <!-- Collapsable categories -->
+                    <ul class="collapsible blue-text text-darken-2" data-collapsible="accordion">
+                        <li>
+                          <div class="collapsible-header" style="background: rgba(0, 0, 0, 0.5);"><i class="material-icons">whatshot</i>Category list</div>
+                          <div class="collapsible-body" style="background: rgba(0, 0, 0, 0.5);">
+                            <div class="row center">
+                              <input name="all" type="checkbox" class="filled-in" id="cb_all" checked="checked" />
+                              <label class="filled-in blue-text text-darken-2" for="cb_all">Все категории</label>
+                            </div>
+                            <div class="row center">
+                              <input name="all" type="checkbox" class="filled-in" id="cb_russia" />
+                              <label class="filled-in blue-text text-darken-2" for="cb_russia">Россия</label>
+                              <input name="russia" type="checkbox" class="filled-in" id="cb_world" />
+                              <label class="filled-in blue-text text-darken-2" for="cb_world">Мир</label>
+                              <input name="ussr" type="checkbox" class="filled-in" id="cb_ussr" />
+                              <label class="filled-in blue-text text-darken-2" for="cb_ussr">Бывший СССР</label>
+                            </div>
+                            <div class="row center">
+                              <input name="economics" type="checkbox" class="filled-in" id="cb_economics" />
+                              <label class="filled-in blue-text text-darken-2" for="cb_economics">Финансы</label>
+                              <input name="business" type="checkbox" class="filled-in" id="cb_business" />
+                              <label class="filled-in blue-text text-darken-2" for="cb_business">Бизнес</label>
+                              <input name="forces" type="checkbox" class="filled-in" id="cb_forces" />
+                              <label class="filled-in blue-text text-darken-2" for="cb_forces">Силовые структуры</label>
+                            </div>
+                            <div class="row center">
+                              <input name="science" type="checkbox" class="filled-in" id="cb_science" />
+                              <label class="filled-in blue-text text-darken-2" for="cb_science">Наука и техника</label>
+                              <input name="sport" type="checkbox" class="filled-in" id="cb_sport" />
+                              <label class="filled-in blue-text text-darken-2" for="cb_sport">Спорт</label>
+                              <input name="culture" type="checkbox" class="filled-in" id="cb_culture" />
+                              <label class="filled-in blue-text text-darken-2" for="cb_culture">Культура</label>
+                            </div>
+                            <div class="row center">
+                              <input name="media" type="checkbox" class="filled-in" id="cb_media" />
+                              <label class="filled-in blue-text text-darken-2" for="cb_media">Интернет и СМИ</label>
+                              <input name="style" type="checkbox" class="filled-in" id="cb_style" />
+                              <label class="filled-in blue-text text-darken-2" for="cb_style">Ценности</label>
+                              <input name="travel" type="checkbox" class="filled-in" id="cb_travel" />
+                              <label class="filled-in blue-text text-darken-2" for="cb_travel">Путешествия</label>
+                            </div>
+                            <div class="row center">
+                              <input name="life" type="checkbox" class="filled-in" id="cb_life" />
+                              <label class="filled-in blue-text text-darken-2" for="cb_life">Из жизни</label>
+                              <input name="motor" type="checkbox" class="filled-in" id="cb_motor" />
+                              <label class="filled-in blue-text text-darken-2" for="cb_motor">Мотор</label>
+                              <input name="realty" type="checkbox" class="filled-in" id="cb_realty" />
+                              <label class="filled-in blue-text text-darken-2" for="cb_realty">Недвижимость</label>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                <div class="row" style="background: rgba(0, 0, 0, 0.5);">
+                  <div class="input-field col s12">
+                    <input id="date1" type="date" name="startdate" class="datepicker white-text">
+                    <label class="filled-in blue-text text-darken-2" for="date1" data-error="wrong" data-success="right">Start period</label>
+                  </div>
                 </div>
-              </div>
-            </form>
-        <!--   <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a> -->
+                <div class="row" style="background: rgba(0, 0, 0, 0.5);">
+                  <div class="input-field col s12">
+                    <input id="date2" type="date" name="enddate" class="datepicker white-text">
+                    <label class="filled-in blue-text text-darken-2" for="date2" data-error="wrong" data-success="right">End period</label>
+                  </div>
+                </div>
+                <div class="row" style="background: rgba(0, 0, 0, 0.5);">
+                  <div class="input-field col s12">
+                    <input class="white-text text-darken-2" id="email" name="email" type="email" class="validate">
+                    <label class="filled-in blue-text text-darken-2" for="email" data-error="wrong" data-success="right">Email</label>
+                  </div>
+                </div>
+                <a href="javascript: submitform()" class="btn-large waves-effect waves-light teal lighten-1">Lets rock!</a>
+              </form>
+          </div>
         </div>
         <br><br>
 
       </div>
     </div>
-    <div class="parallax"><img src="{% static "background3.jpg"%}" alt="Unsplashed background img 1"></div>
   </div>
 
 
-  <div class="container">
-    <div class="section">
+<!--   <div class="container">
+    <div class="section"> -->
 
       <!--   Icon Section   -->
-      <div class="row">
+<!--       <div class="row">
         <div class="col s12 m4">
           <div class="icon-block">
             <h2 class="center brown-text"><i class="material-icons">settings</i></h2>
@@ -69,22 +149,47 @@
             <h2 class="center brown-text"><i class="material-icons">group</i></h2>
             <h5 class="center">Easy to work with</h5>
 
-            <p class="light">Just use this form and push the button.</p>
+            <p class="light">Just fill this form and push the button.</p>
           </div>
         </div>
-      </div>
+      </div> -->
 
-    </div>
-  </div>
+    <!-- </div> -->
+  <!-- </div> -->
+
+
 
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="{% static "js/materialize.js" %}"></script>
   <script src="{% static "js/init.js" %}"></script>
-  <script type="text/javascript"> $('.datepicker').pickadate({
+  <script type="text/javascript">
+  $('.datepicker').pickadate({
     selectMonths: true,
     selectYears: 15
-  });</script>
-
+  });
+  $(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
+  function submitform()
+  {
+    var url=$('#newtask').attr('action'),
+        data=$('#newtask').serialize();
+    $.ajax({
+      url:url,
+      type:'post',
+      data:data,
+      dataType: 'json',
+      success:function(data){
+        console.log(JSON.stringify(data));
+        var json = JSON.stringify(data)
+        json = JSON.parse(json)
+        if (json.status == 'ok'){
+          Materialize.toast($('<span class="black-text">' + json.message +'</span>'), 5000, 'rounded green');
+        } else {
+          Materialize.toast($('<span class="white-text">' + json.message +'</span>'), 10000, 'rounded red');
+    }}});
+  }
+  </script>
   </body>
 </html>
