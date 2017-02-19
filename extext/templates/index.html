@@ -22,23 +22,6 @@
         <div class='darken-3 z-depth-2' style="background: rgba(0, 125, 0, .5);border-radius: 50px;">
           <div class="row center" style="padding: 30px 20px 10px 20px;opacity:1.0;">
               <form id="newtask" action="/newtask/" method="post" class="col s12">
-                    <!-- 
-                    <option value="/2017/02/02/">Все рубрики</option>
-                    <option value="/rubrics/russia/2017/02/03/">Россия</option>
-                    <option value="/rubrics/world/2017/02/03/">Мир</option>
-                    <option value="/rubrics/ussr/2017/02/03/">Бывший СССР</option>
-                    <option value="/rubrics/economics/2017/02/03/">Финансы</option>
-                    <option value="/rubrics/business/2017/02/03/">Бизнес</option>
-                    <option value="/rubrics/forces/2017/02/03/">Силовые структуры</option>
-                    <option value="/rubrics/science/2017/02/03/">Наука и техника</option>
-                    <option value="/rubrics/sport/2017/02/03/">Спорт</option>
-                    <option value="/rubrics/culture/2017/02/03/">Культура</option>
-                    <option value="/rubrics/media/2017/02/03/">Интернет и СМИ</option>
-                    <option value="/rubrics/style/2017/02/03/">Ценности</option>
-                    <option value="/rubrics/travel/2017/02/03/">Путешествия</option>
-                    <option value="/rubrics/life/2017/02/03/">Из жизни</option>
-                    <option value="/rubrics/motor/2017/02/03/">Мотор</option>
-                    <option value="/rubrics/realty/2017/02/03/">Недвижимость</option></select> -->
                     {% csrf_token %}
                     <!-- Collapsable categories -->
                     <ul class="collapsible blue-text text-darken-2" data-collapsible="accordion">
@@ -50,9 +33,9 @@
                               <label class="filled-in blue-text text-darken-2" for="cb_all">Все категории</label>
                             </div>
                             <div class="row center">
-                              <input name="all" type="checkbox" class="filled-in" id="cb_russia" />
+                              <input name="russia" type="checkbox" class="filled-in" id="cb_russia" />
                               <label class="filled-in blue-text text-darken-2" for="cb_russia">Россия</label>
-                              <input name="russia" type="checkbox" class="filled-in" id="cb_world" />
+                              <input name="world" type="checkbox" class="filled-in" id="cb_world" />
                               <label class="filled-in blue-text text-darken-2" for="cb_world">Мир</label>
                               <input name="ussr" type="checkbox" class="filled-in" id="cb_ussr" />
                               <label class="filled-in blue-text text-darken-2" for="cb_ussr">Бывший СССР</label>
@@ -140,7 +123,7 @@
             <h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>
             <h5 class="center">Used frameworks</h5>
 
-            <p class="light">I have to used framework Django, beautifulsoup4, requests, celery and xhtml2pdf.</p>
+            <p class="light">I have to used framework Django, beautifulsoup4, requests, celery and WeasyPrint.</p>
           </div>
         </div>
 
@@ -188,7 +171,11 @@
           Materialize.toast($('<span class="black-text">' + json.message +'</span>'), 5000, 'rounded green');
         } else {
           Materialize.toast($('<span class="white-text">' + json.message +'</span>'), 10000, 'rounded red');
-    }}});
+      }},
+      error:function(XMLHttpRequest, textStatus, errorThrown){
+        Materialize.toast($('<span class="white-text">' + errorThrown + '</span>'), 10000, 'rounded red');
+      }
+  });
   }
   </script>
   </body>
